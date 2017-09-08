@@ -109,6 +109,19 @@ ps -ef|grep jupyter
 ```
 查询jupyter线程，使用kill关闭线程。
 
+
+7. 使用nohup命令后台运行
+```
+$ nohup jupyter notebook &
+```
+查看任务列表
+```
+$ jobs
+```
+
+使用 fg %n关闭
+
+
 ---
 
 ## 未测试流程:
