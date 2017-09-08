@@ -89,3 +89,15 @@ module.exports = {
 	API_ROOT: '"//api.ftisland.com/"'
 }
 ```
+
+3、调用参数
+在需要调用API的位置使用：
+```
+// 配置API接口地址
+var root = process.env.API_ROOT
+```
+重启项目，配置生效。
+```
+npm run dev // 开发环境接口
+npm run build // 自动切换到生产环境接口
+```
