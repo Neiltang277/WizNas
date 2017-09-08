@@ -14,46 +14,46 @@
 
 1、安装python3.6的相关依赖
 ```
-# yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel
+$ yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel
 ```
 
 2、下载python3
 ```
-# wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
+$ wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
 ```
 
 3、解压并进入目录
 ```
-# tar -xzvf Python-3.6.0.tgz -C  /tmp
-# cd  /tmp/Python-3.6.0/
+$ tar -xzvf Python-3.6.0.tgz -C  /tmp
+$ cd  /tmp/Python-3.6.0/
 ```
 
 4、修改python3的安装目录
 ```
-# ./configure --prefix=/usr/local
+$ ./configure --prefix=/usr/local
 ```
 
 5、安装成功后的Python3文件目录
 ```
-# python3.6程序的执行文件：/usr/local/bin/python3.6
-# python3.6应用程序目录：/usr/local/lib/python3.6
-# pip3的执行文件：/usr/local/bin/pip3.6
-# pyenv3的执行文件：/usr/local/bin/pyenv-3.6
+$ python3.6程序的执行文件：/usr/local/bin/python3.6
+$ python3.6应用程序目录：/usr/local/lib/python3.6
+$ pip3的执行文件：/usr/local/bin/pip3.6
+$ pyenv3的执行文件：/usr/local/bin/pyenv-3.6
 ```
 
 6、更改/usr，个人建议，最好保留原有的python2，用python3命令的方式使用python3，这样可以保证其他linux应用调用python时不会出现问题
 ```
-# ln -s /usr/local/bin/python3.6 /usr/bin/python3
-# ln -s /usr/local/bin/pip3.6 /usr/bin/pip3
+$ ln -s /usr/local/bin/python3.6 /usr/bin/python3
+$ ln -s /usr/local/bin/pip3.6 /usr/bin/pip3
 ```
 
 **ps: 如果有需要更改/usr/bin/python系统自带的python链接：**
 
 ```
-# cd/usr/bin
-# python python.backup
-# ln -s /usr/local/bin/python3.6 /usr/bin/python
-# ln -s /usr/local/bin/python3.6 /usr/bin/python3
+$ cd/usr/bin
+$ python python.backup
+$ ln -s /usr/local/bin/python3.6 /usr/bin/python
+$ ln -s /usr/local/bin/python3.6 /usr/bin/python3
 ```
 如遇到部分命令打开失效，则需要更改相关的配置文件：
 ```
@@ -66,8 +66,8 @@
 
 1. pip方式安装
 ```
-# pip3  install ipython
-# pip3 install jupyter
+$ pip3  install ipython
+$ pip3 install jupyter
 ```
 2. 生成Jupyter配置文件
 ```
@@ -108,3 +108,24 @@ terminal界面使用ctrl+c关闭;
 ps -ef|grep jupyter
 ```
 查询jupyter线程，使用kill关闭线程。
+
+---
+
+## 未测试流程:
+**需要输入密码访问，传输基于ssh**
+1.生成秘钥
+```
+$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout key_cert.pem -out key_cert.pem
+```
+2. 有了key_cert.pem文件后可以先测试下正确性，使用如下方式启动Jupyter：
+```
+$ ipython notebook --certfile=key_cert.pem
+```
+如果浏览器打开的地址为https开头，那就成功了。
+
+3. 重新更改ipython_notebook_config.py文件：
+```
+c.NotebookApp.certfile = u'/absolute/path/to/your/certificate/key_cert.pem'
+```
+4. 启动服务
+
