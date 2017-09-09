@@ -1,3 +1,7 @@
+## 安装Mysql
+http://www.cnblogs.com/starof/p/4680083.html
+
+
 ## centos7 上安装mysql5.7后登录报错ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password:yes)
 
 1，停止mysql服务
